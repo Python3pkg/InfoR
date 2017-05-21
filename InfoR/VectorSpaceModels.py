@@ -22,7 +22,7 @@ try:
 	from sklearn.metrics.pairwise import cosine_similarity
 	from sklearn.preprocessing import Normalizer
 except:
-	print "Error : Requires scikit-learn."
+	print("Error : Requires scikit-learn.")
 	sys.exit()
 
 

@@ -76,7 +76,7 @@ class ProbModel:
 		"""
 		allWords = []
 		allDocs = self.text
-		for d in allDocs.keys():
+		for d in list(allDocs.keys()):
 			d = allDocs[d]
 			docWords = self.words(d)
 			allWords.extend(docWords)
@@ -96,7 +96,7 @@ class ProbModel:
 		allDocs = self.text
 		docFreq = defaultdict(int)
 		for x in allWords:
-			for d in allDocs.keys():
+			for d in list(allDocs.keys()):
 				d = allDocs[d]
 				docTerms = self.words(d) 
 				if (x in docTerms):
@@ -194,7 +194,7 @@ class ProbModel:
 
 		documents = self.text
 		rankingDict = defaultdict(float)
-		for d in documents.keys():
+		for d in list(documents.keys()):
 			docText = documents[d]
 			score = self.docScore(docText, query, k, b)
 			rankingDict[d] = score
@@ -229,7 +229,7 @@ class ProbModel:
 		if (b != None):
 			b = b	
 		rankings = self.ranking(query, k, b)
-		rankings = sorted(rankings.iteritems(), key=operator.itemgetter(1), reverse=True)
+		rankings = sorted(iter(rankings.items()), key=operator.itemgetter(1), reverse=True)
 		for i in range(n_docs):
 			u,v = rankings[i]
 			relevantDocs.append(u)

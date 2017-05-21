@@ -79,7 +79,7 @@ class LanguageModel:
 		"""
 		allWords = []
 		allDocs = self.text
-		for d in allDocs.keys():
+		for d in list(allDocs.keys()):
 			d = allDocs[d]
 			docWords = self.words(d)
 			allWords.extend(docWords)
@@ -147,7 +147,7 @@ class LanguageModel:
 		"""	
 		rakingDict = defaultdict(float)
 		allDocs = self.text 	
-		for d in allDocs.keys():
+		for d in list(allDocs.keys()):
 			docText = allDocs[d]
 			logScore = self.document_logScore(docText, query)
 			rakingDict[d] = logScore
@@ -169,7 +169,7 @@ class LanguageModel:
 		"""	
 		relevantDocs = []
 		rankings = self.logScoreDict(query)
-		rankings = sorted(rankings.iteritems(), key=operator.itemgetter(1), reverse=True)
+		rankings = sorted(iter(rankings.items()), key=operator.itemgetter(1), reverse=True)
 		for i in range(n_docs):
 			u,v = rankings[i]
 			relevantDocs.append(u)
